@@ -35,6 +35,7 @@ defmodule Monopoly.MixProject do
     [
       {:phoenix, "~> 1.5.9"},
       {:phoenix_ecto, "~> 4.1"},
+      {:poison, "~> 3.1"},
       {:ecto_sql, "~> 3.4"},
       {:postgrex, ">= 0.0.0"},
       {:telemetry_metrics, "~> 0.4"},

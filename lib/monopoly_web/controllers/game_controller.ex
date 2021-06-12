@@ -1,8 +1,9 @@
 defmodule MonopolyWeb.GameController do
   use MonopolyWeb, :controller
+  alias Monopoly.Dice
 
   def roll(conn, _params) do
-    dicerolls = [diceroll(), diceroll()]
+    dicerolls = Dice.roll_times(2)
     body = %{
       roll: %{
         dicerolls: dicerolls,
@@ -13,9 +14,5 @@ defmodule MonopolyWeb.GameController do
       conn,
       body
     )
-  end
-
-  defp diceroll() do
-    :rand.uniform(6)
   end
 end

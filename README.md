@@ -1,19 +1,20 @@
-# Monopoly
+# :tophat: :game_die: Monopoly
 
-To start your Phoenix server:
+### Local Development
 
+To start the server:
+  * Install [Elixir](https://elixir-lang.org/install.html)
+  * Install [Phoenix](https://hexdocs.pm/phoenix/installation.html#phoenix)
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.setup`
   * Start Phoenix endpoint with `mix phx.server`
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+The server should now be running at `localhost:4000`.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+### Quickstart
 
-## Learn more
+To play a game, start the server and run the following command:
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+```sh
+curl -X POST localhost:4000/api/game
+```

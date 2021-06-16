@@ -4,10 +4,11 @@ defmodule MonopolyWeb.GameController do
 
   def roll(conn, _params) do
     dicerolls = Dice.roll_times(2)
+    total = Enum.sum(dicerolls)
     body = %{
       roll: %{
         dicerolls: dicerolls,
-        total: Enum.sum(dicerolls),
+        total: total,
       },
     }
     json(

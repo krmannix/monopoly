@@ -3,7 +3,7 @@ defmodule MonopolyWeb.GameControllerTest do
 
   describe "#roll" do
     test "includes each dice roll individually in the response" do
-      conn = post(build_conn(), "/api/roll")
+      conn = post(build_conn(), "/api/v1/roll")
 
       assert conn.status == 200
 
@@ -19,7 +19,7 @@ defmodule MonopolyWeb.GameControllerTest do
     end
 
     test "includes the sum of the dice rolls in the response" do
-      conn = post(build_conn(), "/api/roll")
+      conn = post(build_conn(), "/api/v1/roll")
 
       assert conn.status == 200
 

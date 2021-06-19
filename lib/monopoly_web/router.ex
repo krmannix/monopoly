@@ -5,7 +5,7 @@ defmodule MonopolyWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", MonopolyWeb do
+  scope "/api/v1", MonopolyWeb do
     pipe_through :api
 
     post "/roll", GameController, :roll

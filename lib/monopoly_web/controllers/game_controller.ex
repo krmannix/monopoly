@@ -6,12 +6,11 @@ defmodule MonopolyWeb.GameController do
 
   def create(conn, params) do
     name = extract_name(params["name"])
+    human_player = build_player(name)
 
     body = %{
       players: [
-        %{
-          name: name,
-        }
+        human_player,
       ],
     }
 
@@ -40,4 +39,10 @@ defmodule MonopolyWeb.GameController do
     if String.match?(name, ~r/^[[:space:]]*$/), do: @default_player_name, else: String.trim(name)
   end
   defp extract_name(_), do: @default_player_name
+
+  defp build_player(name) do
+    %{
+      name: name,
+    }
+  end
 end

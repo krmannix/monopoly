@@ -5,14 +5,17 @@ defmodule MonopolyWeb.GameController do
   @default_player_name "Player 1"
 
   def create(conn, params) do
-    name = extract_name(params["name"])
-    human_player = build_player(name)
-
-    body = %{
-      players: [
-        human_player,
-      ],
-    }
+    body = case body_from_params(params) do
+      {:ok, players} -> %{
+        players: players
+      }
+      {:error, error_message} ->
+        %{
+          error: %{
+            message: error_message,
+          },
+        }
+    end
 
     json(conn, body)
   end
@@ -33,6 +36,15 @@ defmodule MonopolyWeb.GameController do
       conn,
       body
     )
+  end
+
+  def body_from_params(params) do
+    name = extract_name(params["name"])
+    human_player = build_player(name)
+    players = [
+      human_player,
+    ]
+    {:ok, players}
   end
 
   defp extract_name(name) when is_binary(name) do

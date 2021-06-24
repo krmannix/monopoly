@@ -64,7 +64,7 @@ defmodule MonopolyWeb.GameControllerTest do
 
       conn = post(build_conn(), "/api/v1/games", params)
 
-      assert conn.status == 200
+      assert conn.status == 400
 
       %{
         "error" => %{

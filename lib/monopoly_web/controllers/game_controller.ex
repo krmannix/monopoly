@@ -6,17 +6,18 @@ defmodule MonopolyWeb.GameController do
   @default_player_name "Player 1"
 
   def create(conn, params) do
-    body = case body_from_params(params) do
-      {:ok, body} -> body
+    case body_from_params(params) do
+      {:ok, body} -> json(conn, body)
       {:error, error_message} ->
-        %{
+        body = %{
           error: %{
             message: error_message,
           },
         }
+        conn
+        |> put_status(400)
+        |> json(body)
     end
-
-    json(conn, body)
   end
 
   def roll(conn, _params) do

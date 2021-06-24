@@ -38,11 +38,10 @@ defmodule MonopolyWeb.GameController do
   end
 
   def body_from_params(params) do
-    name = extract_name(params["name"])
-    human_player = build_player(name)
-
-    with {:ok, player_count} <- extract_player_count(params["playerCount"])
+    with {:ok, name} <- extract_name(params["name"]),
+         {:ok, player_count} <- extract_player_count(params["playerCount"])
     do
+      human_player = build_player(name)
       computer_players = build_computer_players(player_count - 1)
       body = %{
         players: [human_player | computer_players]
@@ -54,9 +53,9 @@ defmodule MonopolyWeb.GameController do
   end
 
   defp extract_name(name) when is_binary(name) do
-    if String.match?(name, ~r/^[[:space:]]*$/), do: @default_player_name, else: String.trim(name)
+    if String.match?(name, ~r/^[[:space:]]*$/), do: {:ok, @default_player_name}, else: {:ok, String.trim(name)}
   end
-  defp extract_name(_), do: @default_player_name
+  defp extract_name(_), do: {:ok, @default_player_name}
 
   defp extract_player_count(count) when is_integer(count) do
     if 1 < count and count <= 4 do

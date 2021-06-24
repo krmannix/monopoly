@@ -2,13 +2,12 @@ defmodule MonopolyWeb.GameController do
   use MonopolyWeb, :controller
   alias Monopoly.Dice
 
+  @default_player_count 4
   @default_player_name "Player 1"
 
   def create(conn, params) do
     body = case body_from_params(params) do
-      {:ok, players} -> %{
-        players: players
-      }
+      {:ok, body} -> body
       {:error, error_message} ->
         %{
           error: %{
@@ -41,16 +40,38 @@ defmodule MonopolyWeb.GameController do
   def body_from_params(params) do
     name = extract_name(params["name"])
     human_player = build_player(name)
-    players = [
-      human_player,
-    ]
-    {:ok, players}
+
+    with {:ok, player_count} <- extract_player_count(params["playerCount"])
+    do
+      computer_players = build_computer_players(player_count - 1)
+      body = %{
+        players: [human_player | computer_players]
+      }
+      {:ok, body}
+    else
+      {:error, message} -> {:error, message}
+    end
   end
 
   defp extract_name(name) when is_binary(name) do
     if String.match?(name, ~r/^[[:space:]]*$/), do: @default_player_name, else: String.trim(name)
   end
   defp extract_name(_), do: @default_player_name
+
+  defp extract_player_count(count) when is_integer(count) do
+    if 1 < count and count <= 4 do
+      {:ok, count}
+    else
+      {:error, "playerCount must be set between 2 and 4, inclusive"}
+    end
+  end
+
+  defp extract_player_count(count) when is_nil(count), do: {:ok, @default_player_count}
+  defp extract_player_count(_), do: {:error, "must be an integer between 2 and 4, inclusive"}
+
+  defp build_computer_players(count) do
+    Enum.map(1..count, fn (i) -> build_player("Conputer Player #{i}") end)
+  end
 
   defp build_player(name) do
     %{

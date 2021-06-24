@@ -33,11 +33,46 @@ defmodule MonopolyWeb.GameControllerTest do
         "players" => [
           %{
             "name" => name,
-          } | _
+          } | rest
         ],
       } = Poison.decode!(conn.resp_body)
 
       assert name == "Player 1"
+      assert Enum.count(rest) == 3
+    end
+
+    test "sets the number of players based on user input" do
+      params = %{
+        "playerCount" => 2,
+      }
+
+      conn = post(build_conn(), "/api/v1/games", params)
+
+      assert conn.status == 200
+
+      %{
+        "players" => players,
+      } = Poison.decode!(conn.resp_body)
+
+      assert Enum.count(players) == 2
+    end
+
+    test "returns an error if the number of players requested is out of bounds" do
+      params = %{
+        "playerCount" => 1,
+      }
+
+      conn = post(build_conn(), "/api/v1/games", params)
+
+      assert conn.status == 200
+
+      %{
+        "error" => %{
+          "message" => message,
+        },
+      } = Poison.decode!(conn.resp_body)
+
+      assert message == "playerCount must be set between 2 and 4, inclusive"
     end
   end
 

@@ -6,7 +6,7 @@ defmodule MonopolyWeb.GameController do
   @default_player_name "Player 1"
 
   def create(conn, params) do
-    case body_from_params(params) do
+    case create_from_params(params) do
       {:ok, body} -> json(conn, body)
       {:error, error_message} ->
         body = %{
@@ -38,16 +38,15 @@ defmodule MonopolyWeb.GameController do
     )
   end
 
-  def body_from_params(params) do
+  def create_from_params(params) do
     with {:ok, name} <- extract_name(params["name"]),
          {:ok, player_count} <- extract_player_count(params["playerCount"])
     do
       human_player = build_player(name)
       computer_players = build_computer_players(player_count - 1)
-      body = %{
-        players: [human_player | computer_players]
-      }
-      {:ok, body}
+      players = [human_player | computer_players]
+      game = build_game(players)
+      {:ok, game}
     else
       {:error, message} -> {:error, message}
     end
@@ -71,6 +70,13 @@ defmodule MonopolyWeb.GameController do
 
   defp build_computer_players(count) do
     Enum.map(1..count, fn (i) -> build_player("Conputer Player #{i}") end)
+  end
+
+  defp build_game(players) do
+    %Game{
+      id: Ecto.UUID.generate,
+      players: players,
+    }
   end
 
   defp build_player(name) do

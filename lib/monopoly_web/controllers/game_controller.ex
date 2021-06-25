@@ -74,9 +74,14 @@ defmodule MonopolyWeb.GameController do
   end
 
   defp build_player(name) do
-    %{
+    %Player{
       id: Ecto.UUID.generate,
       name: name,
+      money: 1500,
+      isBankrupt: false,
+      isHumanPlayer: false,
+      properties: [],
+      getOutOfJailFreeCardCount: 0,
     }
   end
 end

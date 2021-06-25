@@ -1,4 +1,5 @@
 defmodule Player do
+  @derive Jason.Encoder
   defstruct id: nil,
             name: "Default Player",
             money: 1500,

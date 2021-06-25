@@ -15,11 +15,21 @@ defmodule MonopolyWeb.GameControllerTest do
         "players" => [
           %{
             "name" => name,
+            "money" => money,
+            "isBankrupt" => isBankrupt,
+            "isHumanPlayer" => isHumanPlayer,
+            "properties" => properties,
+            "getOutOfJailFreeCardCount" => getOutOfJailFreeCardCount,
           } | _
         ],
       } = Poison.decode!(conn.resp_body)
 
       assert name == "Kevin"
+      assert money == 1500
+      assert isBankrupt == false
+      assert isHumanPlayer == false
+      assert properties == []
+      assert getOutOfJailFreeCardCount == 0
     end
 
     test "sets a default players name without user input" do

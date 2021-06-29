@@ -3,6 +3,8 @@ defmodule Space do
 
   @space_json Util.load_json_from_file!("priv/data/spaces.json")
 
+  defstruct [:id, :name, :type]
+
   def space_at(start_index, number_of_steps) do
     Enum.at(spaces(), rem(start_index + number_of_steps, Enum.count(spaces())))
   end

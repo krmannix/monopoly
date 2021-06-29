@@ -80,7 +80,7 @@ defmodule MonopolyWeb.GameController do
   end
 
   defp build_player(name) do
-    %Player{
+    %SimplePlayer{
       id: Ecto.UUID.generate,
       name: name,
       money: 1500,

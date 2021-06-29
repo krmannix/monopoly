@@ -1,4 +1,4 @@
-defmodule Player do
+defmodule SimplePlayer do
   @derive Jason.Encoder
   defstruct id: nil,
             name: "Default Player",

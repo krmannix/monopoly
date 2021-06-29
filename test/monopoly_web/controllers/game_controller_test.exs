@@ -1,6 +1,91 @@
 defmodule MonopolyWeb.GameControllerTest do
   use MonopolyWeb.ConnCase
 
+  describe "#create" do
+    test "sets a players name from user input" do
+      params = %{
+        "name" => "Kevin",
+      }
+
+      conn = post(build_conn(), "/api/v1/games", params)
+
+      assert conn.status == 200
+
+      %{
+        "players" => [
+          %{
+            "name" => name,
+            "money" => money,
+            "isBankrupt" => isBankrupt,
+            "isHumanPlayer" => isHumanPlayer,
+            "properties" => properties,
+            "getOutOfJailFreeCardCount" => getOutOfJailFreeCardCount,
+          } | _
+        ],
+      } = Poison.decode!(conn.resp_body)
+
+      assert name == "Kevin"
+      assert money == 1500
+      assert isBankrupt == false
+      assert isHumanPlayer == false
+      assert properties == []
+      assert getOutOfJailFreeCardCount == 0
+    end
+
+    test "sets a default players name without user input" do
+      params = %{}
+
+      conn = post(build_conn(), "/api/v1/games", params)
+
+      assert conn.status == 200
+
+      %{
+        "players" => [
+          %{
+            "name" => name,
+          } | rest
+        ],
+      } = Poison.decode!(conn.resp_body)
+
+      assert name == "Player 1"
+      assert Enum.count(rest) == 3
+    end
+
+    test "sets the number of players based on user input" do
+      params = %{
+        "playerCount" => 2,
+      }
+
+      conn = post(build_conn(), "/api/v1/games", params)
+
+      assert conn.status == 200
+
+      %{
+        "players" => players,
+      } = Poison.decode!(conn.resp_body)
+
+      assert Enum.count(players) == 2
+    end
+
+    test "returns an error if the number of players requested is out of bounds" do
+      params = %{
+        "playerCount" => 1,
+      }
+
+      conn = post(build_conn(), "/api/v1/games", params)
+
+      assert conn.status == 400
+
+      %{
+        "error" => %{
+          "message" => message,
+        },
+      } = Poison.decode!(conn.resp_body)
+
+      assert message == "playerCount must be set between 2 and 4, inclusive"
+    end
+  end
+
   describe "#roll" do
     test "includes each dice roll individually in the response" do
       conn = post(build_conn(), "/api/v1/roll")

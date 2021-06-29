@@ -65,4 +65,16 @@ defmodule Monopoly.SpaceTest do
       assert result == expected
     end
   end
+
+  describe "#starting_space" do
+    test "it returns Go" do
+      result = Space.starting_space()
+      expected = %Space{
+        id: "8c826137-989e-4b3c-bbeb-ae2aa83930b7",
+        name: "Go",
+        type: "go",
+      }
+      assert result == expected
+    end
+  end
 end

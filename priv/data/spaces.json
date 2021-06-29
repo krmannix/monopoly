@@ -1,124 +1,204 @@
 {
   "spaces": [
     {
-        "name": "Go"
+        "id": "8c826137-989e-4b3c-bbeb-ae2aa83930b7",
+        "name": "Go",
+        "type": "go"
     },
     {
-        "name": "Mediterranean Avenue"
+        "id": "ae5ce454-9aeb-4660-a318-cc635def636d",
+        "name": "Mediterranean Avenue",
+        "type": "property"
     },
     {
-        "name": "Community Chest"
+        "id": "6cba37bd-a6ac-499e-b701-58333790e996",
+        "name": "Community Chest",
+        "type": "community_chest"
     },
     {
-        "name": "Baltic Avenue"
+        "id": "6d48a337-3ad0-4283-a9a1-42f161300460",
+        "name": "Baltic Avenue",
+        "type": "property"
     },
     {
-        "name": "Income Tax"
+        "id": "8afe3723-4439-4a75-b99e-3e4f0f5646aa",
+        "name": "Income Tax",
+        "type": "property"
     },
     {
-        "name": "Reading Railroad"
+        "id": "2c2b3094-add2-4f4b-8c8f-7feab7b4bba3",
+        "name": "Reading Railroad",
+        "type": "property"
     },
     {
-        "name": "Oriental Avenue"
+        "id": "4a42047f-7538-4d3b-9480-768efd8325ee",
+        "name": "Oriental Avenue",
+        "type": "property"
     },
     {
-        "name": "Chance"
+        "id": "0e960952-c78b-46eb-866b-a8ac8d1aee94",
+        "name": "Chance",
+        "type": "chance"
     },
     {
-        "name": "Vermont Avenue"
+        "id": "8fb65c04-c6b5-498f-a46f-22878c484bb0",
+        "name": "Vermont Avenue",
+        "type": "property"
     },
     {
-        "name": "Connecticut Avenue"
+        "id": "60bff609-1ecb-4039-b331-0b4baa807a6a",
+        "name": "Connecticut Avenue",
+        "type": "property"
     },
     {
-        "name": "Jail"
+        "id": "7fd73ac3-cfbe-4770-84c2-0cbf65556e7a",
+        "name": "Jail",
+        "type": "jail"
     },
     {
-        "name": "St. Charles Place"
+        "id": "1bcf7d16-9f9c-46dd-ab45-c906f0b84031",
+        "name": "St. Charles Place",
+        "type": "property"
     },
     {
-        "name": "Electric Company"
+        "id": "f247c049-949d-4924-b497-6ad36ada5727",
+        "name": "Electric Company",
+        "type": "utility"
     },
     {
-        "name": "States Avenue"
+        "id": "777b2511-fdef-41ea-975d-f5bfa37f235f",
+        "name": "States Avenue",
+        "type": "property"
     },
     {
-        "name": "Virginia Avenue"
+        "id": "ccb7dfab-fc4c-4d64-86b4-a50fcaa6d17e",
+        "name": "Virginia Avenue",
+        "type": "property"
     },
     {
-        "name": "Pennsylvania Railroad"
+        "id": "ccad624d-a335-4b6c-95a3-4f27b4595f4e",
+        "name": "Pennsylvania Railroad",
+        "type": "property"
     },
     {
-        "name": "St. James Place"
+        "id": "f702e458-af9d-4987-b0d6-8163769055a1",
+        "name": "St. James Place",
+        "type": "property"
     },
     {
-        "name": "Community Chest"
+        "id": "09a9edc0-72de-4cac-86e3-b4b547b2ac73",
+        "name": "Community Chest",
+        "type": "property"
     },
     {
-        "name": "Tennessee Avenue"
+        "id": "aa80159d-db13-47d6-a0ca-e145845e4b1a",
+        "name": "Tennessee Avenue",
+        "type": "property"
     },
     {
-        "name": "New York Avenue"
+        "id": "c5a233fc-dba0-4f04-a7f4-abada6cbc0f9",
+        "name": "New York Avenue",
+        "type": "property"
     },
     {
-        "name": "Free Parking"
+        "id": "2273136a-cb59-49d5-b8ad-b38816974102",
+        "name": "Free Parking",
+        "type": "parking"
     },
     {
-        "name": "Kentucky Avenue"
+        "id": "ba2353ee-ef8f-40f2-a80e-530b849e2023",
+        "name": "Kentucky Avenue",
+        "type": "property"
     },
     {
-        "name": "Chance"
+        "id": "21272ab0-7e6c-4df1-bbf1-a2513ff86170",
+        "name": "Chance",
+        "type": "chance"
     },
     {
-        "name": "Indiana Avenue"
+        "id": "2f67a22e-dc03-4d9a-8737-f7d2d9f5c57b",
+        "name": "Indiana Avenue",
+        "type": "property"
     },
     {
-        "name": "Illnois Avenue"
+        "id": "f6f13db8-3fd7-4376-892e-4207243f6d6e",
+        "name": "Illnois Avenue",
+        "type": "property"
     },
     {
-        "name": "B. & O. Railroad"
+        "id": "7c5a9d7e-65a7-4092-8990-e81af6c46a17",
+        "name": "B. & O. Railroad",
+        "type": "property"
     },
     {
-        "name": "Atlatic Avenue"
+        "id": "857c38c1-e5fb-4405-bc5d-c3a5da895257",
+        "name": "Atlatic Avenue",
+        "type": "property"
     },
     {
-        "name": "Ventura Avenue"
+        "id": "7266f0ed-cf28-4e55-ba85-5759b92c5333",
+        "name": "Ventura Avenue",
+        "type": "property"
     },
     {
-        "name": "Water Works"
+        "id": "98f4d834-1788-4989-98af-a207d4ac96b0",
+        "name": "Water Works",
+        "type": "utility"
     },
     {
-        "name": "Marvin Gardens"
+        "id": "3dc18225-ae9c-4895-b1cd-942e8df6f7ea",
+        "name": "Marvin Gardens",
+        "type": "property"
     },
     {
-        "name": "Go To Jail"
+        "id": "bfce6634-7158-48d8-927b-b939b5fad230",
+        "name": "Go To Jail",
+        "type": "go_to_jail"
     },
     {
-        "name": "Pacific Avenue"
+        "id": "d2df68aa-4104-43f0-a390-1392b2a8584c",
+        "name": "Pacific Avenue",
+        "type": "property"
     },
     {
-        "name": "North Carolina Avenue"
+        "id": "9acbdf0b-5523-4570-8f73-523dfdc70dfa",
+        "name": "North Carolina Avenue",
+        "type": "property"
     },
     {
-        "name": "Community Chest"
+        "id": "8f801ee2-2694-40ec-981e-8bdfc2508761",
+        "name": "Community Chest",
+        "type": "community_chest"
     },
     {
-        "name": "Pennsylvania Avenue"
+        "id": "3f94ee83-f62f-4e3b-893d-dd16fb4d7ea7",
+        "name": "Pennsylvania Avenue",
+        "type": "property"
     },
     {
-        "name": "Shortline"
+        "id": "e4f45b21-9d56-433c-8abb-1519db32de3f",
+        "name": "Shortline",
+        "type": "property"
     },
     {
-        "name": "Chance"
+        "id": "6be286f5-8842-4e27-91cd-630f39581d2f",
+        "name": "Chance",
+        "type": "chance"
     },
     {
-        "name": "Park Place"
+        "id": "ae1c7d7d-98e0-45ce-88f2-c618d406747a",
+        "name": "Park Place",
+        "type": "property"
     },
     {
-        "name": "Luxury Tax"
+        "id": "e2d3d696-da62-4981-95b0-9a40112843ae",
+        "name": "Luxury Tax",
+        "type": "property"
     },
     {
-        "name": "Boardwalk"
+        "id": "256b3b66-60d1-4796-817e-84a3f7b36b23",
+        "name": "Boardwalk",
+        "type": "property"
     }
   ]
 }

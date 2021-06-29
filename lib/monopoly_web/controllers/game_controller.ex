@@ -73,7 +73,7 @@ defmodule MonopolyWeb.GameController do
   end
 
   defp build_game(players) do
-    %Game{
+    %SimpleGame{
       id: Ecto.UUID.generate,
       players: players,
     }

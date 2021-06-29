@@ -18,16 +18,24 @@ defmodule MonopolyWeb.GameControllerTest do
             "money" => money,
             "isBankrupt" => isBankrupt,
             "isHumanPlayer" => isHumanPlayer,
+            "currentSpace" => currentSpace,
             "properties" => properties,
             "getOutOfJailFreeCardCount" => getOutOfJailFreeCardCount,
           } | _
         ],
       } = Poison.decode!(conn.resp_body)
 
+      expected_space = %{
+        "id" => "8c826137-989e-4b3c-bbeb-ae2aa83930b7",
+        "name" => "Go",
+        "type" => "go",
+      }
+
       assert name == "Kevin"
       assert money == 1500
       assert isBankrupt == false
       assert isHumanPlayer == false
+      assert currentSpace == expected_space
       assert properties == []
       assert getOutOfJailFreeCardCount == 0
     end
@@ -64,7 +72,14 @@ defmodule MonopolyWeb.GameControllerTest do
         "players" => players,
       } = Poison.decode!(conn.resp_body)
 
+      expected_space = %{
+        "id" => "8c826137-989e-4b3c-bbeb-ae2aa83930b7",
+        "name" => "Go",
+        "type" => "go",
+      }
+
       assert Enum.count(players) == 2
+      assert Enum.all?(players, fn (player) -> player["currentSpace"] == expected_space end)
     end
 
     test "returns an error if the number of players requested is out of bounds" do

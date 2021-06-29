@@ -86,6 +86,7 @@ defmodule MonopolyWeb.GameController do
       money: 1500,
       isBankrupt: false,
       isHumanPlayer: false,
+      currentSpace: Space.starting_space(),
       properties: [],
       getOutOfJailFreeCardCount: 0,
     }

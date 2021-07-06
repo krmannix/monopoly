@@ -10,6 +10,7 @@ defmodule Space do
   def space_at(start_index, number_of_steps) do
     Enum.at(spaces(), rem(start_index + number_of_steps, Enum.count(spaces())))
   end
+  def space_ids, do: Enum.map(spaces(), fn (space) -> space.id end)
 
   def starting_space, do: Enum.find(spaces(), fn (space) -> space.type == @go_type end)
 

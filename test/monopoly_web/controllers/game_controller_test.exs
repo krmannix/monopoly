@@ -16,28 +16,20 @@ defmodule MonopolyWeb.GameControllerTest do
           %{
             "name" => name,
             "money" => money,
-            "isBankrupt" => isBankrupt,
-            "isHumanPlayer" => isHumanPlayer,
-            "currentSpace" => currentSpace,
-            "properties" => properties,
-            "getOutOfJailFreeCardCount" => getOutOfJailFreeCardCount,
+            "is_bankrupt" => is_bankrupt,
+            "is_human_player" => is_human_player,
+            "current_space_id" => current_space_id,
+            "get_out_of_jail_free_card_count" => get_out_of_jail_free_card_count,
           } | _
         ],
       } = Poison.decode!(conn.resp_body)
 
-      expected_space = %{
-        "id" => "8c826137-989e-4b3c-bbeb-ae2aa83930b7",
-        "name" => "Go",
-        "type" => "go",
-      }
-
       assert name == "Kevin"
       assert money == 1500
-      assert isBankrupt == false
-      assert isHumanPlayer == false
-      assert currentSpace == expected_space
-      assert properties == []
-      assert getOutOfJailFreeCardCount == 0
+      assert is_bankrupt == false
+      assert is_human_player == false
+      assert current_space_id == "8c826137-989e-4b3c-bbeb-ae2aa83930b7"
+      assert get_out_of_jail_free_card_count == 0
     end
 
     test "sets a default players name without user input" do
@@ -72,14 +64,10 @@ defmodule MonopolyWeb.GameControllerTest do
         "players" => players,
       } = Poison.decode!(conn.resp_body)
 
-      expected_space = %{
-        "id" => "8c826137-989e-4b3c-bbeb-ae2aa83930b7",
-        "name" => "Go",
-        "type" => "go",
-      }
+      expected_space_id = "8c826137-989e-4b3c-bbeb-ae2aa83930b7"
 
       assert Enum.count(players) == 2
-      assert Enum.all?(players, fn (player) -> player["currentSpace"] == expected_space end)
+      assert Enum.all?(players, fn (player) -> player["current_space_id"] == expected_space_id end)
     end
 
     test "returns an error if the number of players requested is out of bounds" do
@@ -92,12 +80,47 @@ defmodule MonopolyWeb.GameControllerTest do
       assert conn.status == 400
 
       %{
-        "error" => %{
-          "message" => message,
-        },
+        "error_message" => message,
       } = Poison.decode!(conn.resp_body)
 
-      assert message == "playerCount must be set between 2 and 4, inclusive"
+      assert message == "Something went wrong"
+    end
+
+    test "does not accept any player params passed in by the user" do
+      params = %{
+        "players" => %{
+          "current_space_id" => Space.starting_space.id,
+          "name" => "Sent by user",
+          "money" => 1500,
+          "is_bankrupt" => false,
+          "is_human_player" => false,
+          "get_out_of_jail_free_card_count" => 0,
+        },
+      }
+
+      conn = post(build_conn(), "/api/v1/games", params)
+
+      assert conn.status == 200
+
+      %{
+        "players" => [
+          %{
+            "name" => name,
+            "money" => money,
+            "is_bankrupt" => is_bankrupt,
+            "is_human_player" => is_human_player,
+            "current_space_id" => current_space_id,
+            "get_out_of_jail_free_card_count" => get_out_of_jail_free_card_count,
+          } | _
+        ],
+      } = Poison.decode!(conn.resp_body)
+
+      assert name == "Player 1"
+      assert money == 1500
+      assert is_bankrupt == false
+      assert is_human_player == false
+      assert current_space_id == "8c826137-989e-4b3c-bbeb-ae2aa83930b7"
+      assert get_out_of_jail_free_card_count == 0
     end
   end
 

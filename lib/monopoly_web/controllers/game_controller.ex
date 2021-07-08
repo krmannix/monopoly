@@ -52,7 +52,7 @@ defmodule MonopolyWeb.GameController do
   defp extract_name(_), do: @default_player_name
 
   defp build_computer_players(count) when count <= 0, do: []
-  defp build_computer_players(count), do: Enum.map(1..count, fn (i) -> build_player_map("Conputer Player #{i}") end)
+  defp build_computer_players(count), do: Enum.map(1..count, fn (i) -> build_player_map("Computer Player #{i}") end)
 
   defp build_player_maps(params) do
     player_count = extract_player_count(params["playerCount"])

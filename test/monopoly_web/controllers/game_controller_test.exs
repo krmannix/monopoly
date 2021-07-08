@@ -85,6 +85,43 @@ defmodule MonopolyWeb.GameControllerTest do
 
       assert message == "Something went wrong"
     end
+
+    test "does not accept any player params passed in by the user" do
+      params = %{
+        "players" => %{
+          "current_space_id" => Space.starting_space.id,
+          "name" => "Sent by user",
+          "money" => 1500,
+          "is_bankrupt" => false,
+          "is_human_player" => false,
+          "get_out_of_jail_free_card_count" => 0,
+        },
+      }
+
+      conn = post(build_conn(), "/api/v1/games", params)
+
+      assert conn.status == 200
+
+      %{
+        "players" => [
+          %{
+            "name" => name,
+            "money" => money,
+            "is_bankrupt" => is_bankrupt,
+            "is_human_player" => is_human_player,
+            "current_space_id" => current_space_id,
+            "get_out_of_jail_free_card_count" => get_out_of_jail_free_card_count,
+          } | _
+        ],
+      } = Poison.decode!(conn.resp_body)
+
+      assert name == "Player 1"
+      assert money == 1500
+      assert is_bankrupt == false
+      assert is_human_player == false
+      assert current_space_id == "8c826137-989e-4b3c-bbeb-ae2aa83930b7"
+      assert get_out_of_jail_free_card_count == 0
+    end
   end
 
   describe "#roll" do

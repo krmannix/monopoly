@@ -29,7 +29,7 @@ defmodule MonopolyWeb.GameController do
         dicerolls: dicerolls,
         total: total,
       },
-      space: space,
+      space: MonopolyWeb.SpaceView.render("space.json", space: space),
     }
     json(
       conn,

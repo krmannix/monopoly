@@ -2,12 +2,6 @@ defmodule Monopoly.Game do
   use Monopoly.Schema
   import Ecto.Changeset
 
-  @derive {
-    Jason.Encoder,
-    only: [
-      :players,
-    ]
-  }
   schema "games" do
     has_many :players, Monopoly.Player
 

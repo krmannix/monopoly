@@ -4,17 +4,6 @@ defmodule Monopoly.Player do
 
   @space_ids Space.space_ids
 
-  @derive {
-    Jason.Encoder,
-    only: [
-      :current_space_id,
-      :get_out_of_jail_free_card_count,
-      :is_bankrupt,
-      :is_human_player,
-      :money,
-      :name,
-    ]
-  }
   schema "players" do
     field :current_space_id, :string
     field :get_out_of_jail_free_card_count, :integer
@@ -25,6 +14,10 @@ defmodule Monopoly.Player do
     belongs_to :game, Monopoly.Game
 
     timestamps()
+  end
+
+  def current_space(player) do
+    Space.find_space(player.current_space_id)
   end
 
   @doc false

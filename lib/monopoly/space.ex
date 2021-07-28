@@ -4,7 +4,6 @@ defmodule Space do
   @space_json Util.load_json_from_file!("priv/data/spaces.json")
   @go_type "go"
 
-  @derive Jason.Encoder
   defstruct [:id, :name, :type]
 
   def find_space(id), do: Enum.find(spaces(), fn space -> space.id == id end)

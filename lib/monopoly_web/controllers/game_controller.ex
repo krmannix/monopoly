@@ -11,7 +11,7 @@ defmodule MonopolyWeb.GameController do
     case result do
       {:ok, game} ->
 
-        json(conn, game)
+        render(conn, "show.json", game: game, players: game.players)
       {:error, _changeset} ->
         conn
         |> put_status(400)
@@ -29,7 +29,7 @@ defmodule MonopolyWeb.GameController do
         dicerolls: dicerolls,
         total: total,
       },
-      space: space,
+      space: MonopolyWeb.SpaceView.render("space.json", space: space),
     }
     json(
       conn,

@@ -18,7 +18,7 @@ defmodule MonopolyWeb.GameControllerTest do
             "money" => money,
             "is_bankrupt" => is_bankrupt,
             "is_human_player" => is_human_player,
-            "current_space_id" => current_space_id,
+            "current_space" => current_space,
             "get_out_of_jail_free_card_count" => get_out_of_jail_free_card_count,
           } | _
         ],
@@ -28,7 +28,11 @@ defmodule MonopolyWeb.GameControllerTest do
       assert money == 1500
       assert is_bankrupt == false
       assert is_human_player == false
-      assert current_space_id == "8c826137-989e-4b3c-bbeb-ae2aa83930b7"
+      assert current_space == %{
+        "id" => "8c826137-989e-4b3c-bbeb-ae2aa83930b7",
+        "name" => "Go",
+        "type" => "go",
+      }
       assert get_out_of_jail_free_card_count == 0
     end
 
@@ -64,10 +68,14 @@ defmodule MonopolyWeb.GameControllerTest do
         "players" => players,
       } = Poison.decode!(conn.resp_body)
 
-      expected_space_id = "8c826137-989e-4b3c-bbeb-ae2aa83930b7"
+      expected_space = %{
+        "id" => "8c826137-989e-4b3c-bbeb-ae2aa83930b7",
+        "name" => "Go",
+        "type" => "go",
+      }
 
       assert Enum.count(players) == 2
-      assert Enum.all?(players, fn (player) -> player["current_space_id"] == expected_space_id end)
+      assert Enum.all?(players, fn (player) -> player["current_space"] == expected_space end)
     end
 
     test "returns an error if the number of players requested is out of bounds" do
@@ -89,7 +97,7 @@ defmodule MonopolyWeb.GameControllerTest do
     test "does not accept any player params passed in by the user" do
       params = %{
         "players" => %{
-          "current_space_id" => Space.starting_space.id,
+          "space" => Space.starting_space.id,
           "name" => "Sent by user",
           "money" => 1500,
           "is_bankrupt" => false,
@@ -109,7 +117,7 @@ defmodule MonopolyWeb.GameControllerTest do
             "money" => money,
             "is_bankrupt" => is_bankrupt,
             "is_human_player" => is_human_player,
-            "current_space_id" => current_space_id,
+            "current_space" => current_space,
             "get_out_of_jail_free_card_count" => get_out_of_jail_free_card_count,
           } | _
         ],
@@ -119,7 +127,11 @@ defmodule MonopolyWeb.GameControllerTest do
       assert money == 1500
       assert is_bankrupt == false
       assert is_human_player == false
-      assert current_space_id == "8c826137-989e-4b3c-bbeb-ae2aa83930b7"
+      assert current_space == %{
+        "id" => "8c826137-989e-4b3c-bbeb-ae2aa83930b7",
+        "name" => "Go",
+        "type" => "go",
+      }
       assert get_out_of_jail_free_card_count == 0
     end
   end

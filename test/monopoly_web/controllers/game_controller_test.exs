@@ -168,4 +168,48 @@ defmodule MonopolyWeb.GameControllerTest do
       assert x + y == total
     end
   end
+
+  describe "#show" do
+    test "returns a 404 for an unknown id" do
+      conn = get(build_conn(), "/api/v1/games/ebb32e28-2850-4f3d-a3aa-bc4eae5df039")
+
+      assert conn.status == 404
+    end
+
+    test "returns a 404 for an unknown integer id" do
+      conn = get(build_conn(), "/api/v1/games/1")
+
+      assert conn.status == 404
+    end
+
+    test "returns a 200 for an existing id" do
+      game = Monopoly.Factory.insert!(:game)
+
+      conn = get(build_conn(), "/api/v1/games/#{game.id}")
+
+      assert conn.status == 200
+      %{
+        "players" => result_players,
+      } = Poison.decode!(conn.resp_body)
+
+      Enum.each(game.players, fn (player) ->
+        player_match = Enum.find(result_players, fn (result_player) -> result_player["id"] == player.id end)
+        current_space = Space.find_space(player.current_space_id)
+        expected = %{
+          "id" => player.id,
+          "current_space" => %{
+            "id" => current_space.id,
+            "name" => current_space.name,
+            "type" => current_space.type,
+          },
+          "name" => player.name,
+          "money" => player.money,
+          "is_bankrupt" => player.is_bankrupt,
+          "is_human_player" => player.is_human_player,
+          "get_out_of_jail_free_card_count" => player.get_out_of_jail_free_card_count,
+        }
+        assert expected == player_match
+      end)
+    end
+  end
 end

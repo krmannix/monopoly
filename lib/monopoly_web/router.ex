@@ -8,7 +8,10 @@ defmodule MonopolyWeb.Router do
   scope "/api/v1", MonopolyWeb do
     pipe_through :api
 
-    post "/games", GameController, :create
+    resources "/games", GameController, only: [
+      :create,
+      :show,
+    ]
     post "/roll", GameController, :roll
   end
 end

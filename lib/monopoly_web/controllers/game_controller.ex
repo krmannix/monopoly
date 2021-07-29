@@ -19,6 +19,13 @@ defmodule MonopolyWeb.GameController do
     end
   end
 
+  def show(conn, %{"id" => id}) do
+    case Game.find(id, preload: :players) do
+      game when is_nil(game) -> conn |> put_status(404)
+      game -> render(conn, "show.json", game: game)
+    end
+  end
+
   def roll(conn, _params) do
     dicerolls = Dice.roll_times(2)
     total = Enum.sum(dicerolls)

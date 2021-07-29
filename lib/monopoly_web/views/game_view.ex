@@ -7,6 +7,7 @@ defmodule MonopolyWeb.GameView do
 
   def render("game.json", %{game: game}) do
     %{
+      id: game.id,
       players: render_many(game.players, MonopolyWeb.PlayerView, "player.json")
     }
   end

@@ -1,11 +1,20 @@
 defmodule Monopoly.Game do
   use Monopoly.Schema
   import Ecto.Changeset
+  alias Monopoly.Repo
 
   schema "games" do
     has_many :players, Monopoly.Player
 
     timestamps()
+  end
+
+  def find(id, options \\ []) do
+    preload = Keyword.get(options, :preload, [])
+    Repo.get(Monopoly.Game, id)
+    |> Repo.preload(preload)
+  rescue
+    Ecto.Query.CastError -> nil
   end
 
   @doc false
